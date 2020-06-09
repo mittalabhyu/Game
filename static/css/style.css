@@ -1,0 +1,22 @@
+h1 {
+  text-align: center;
+}
+td {
+  width: 100px;
+  height: 100px;
+}
+table {
+  margin: 5px auto;
+}
+.vert {
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+}
+.hori {
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+}
+button{
+	align-self: center;
+	padding-right: 20 20 20;
+}
