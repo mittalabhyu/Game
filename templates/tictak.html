@@ -16,11 +16,15 @@ label{text-align: center;color: blue;}
 .vert {
   border: 4px solid black;
 }
-.verthori {
-  border: 4px solid black;
+.verti {
+  border-left: 4px solid black;
+  border-right: 4px solid black;
 }
+
+
 .hori {
-  border: 4px solid black;
+  border-top: 4px solid black;
+  border-bottom: 4px solid black;
 }
 
 .btn{
@@ -61,20 +65,21 @@ label{text-align: center;color: blue;}
 
 
   <tr>
-    <td><p>{{l[1]}}</p></td>
-    <td class="vert"><p>{{l[2]}}</p></td>
-    <td><p>{{l[3]}}</p></td>
+    <td><strong><p style="font-size: 20px;color: red;">{{l[1]}}</p></td></strong>
+    <td class="verti"><strong><p style="font-size: 20px;color: red;">{{l[2]}}</p></td></strong>
+    <td><strong><p style="font-size: 20px;color: red;">{{l[3]}}</p></td></strong>
   </tr>
   <tr>
-    <td class="hori"><p>{{l[4]}}</p></td>
-    <td class="verthori"><p>{{l[5]}}</p></td>
-    <td class="hori"><p>{{l[6]}}</p></td>
+    <td class="hori"><strong><p style="font-size: 20px;color: red;">{{l[4]}}</p></td></strong>
+    <td class="vert"><strong><p style="font-size: 20px;color: red;">{{l[5]}}</p></td></strong>
+    <td class="hori"><strong><p style="font-size: 20px;color: red;">{{l[6]}}</p></td></strong>
   </tr>
   <tr>
-    <td><p>{{l[7]}}</p></td>
-    <td class="vert"><p>{{l[8]}}</p></td>
-    <td><p>{{l[9]}}</p></td>
+    <td><strong><p style="font-size: 20px;color: red;">{{l[7]}}</p></td></strong>
+    <td class="verti"><strong><p style="font-size: 20px;color: red;">{{l[8]}}</p></td></strong>
+    <td><strong><p style="font-size: 20px;color: red;">{{l[9]}}</p></td></strong>
   </tr>
+
 </table>
 <div class="container">
   <div class="center">
