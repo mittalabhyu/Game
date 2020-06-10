@@ -6,10 +6,12 @@
   <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
   <style>
    h1 {text-align: center;color: white;}
-   h3{text-align: center;color: white;}
-p {text-align: center;color: white;}
-h2 {text-align: center;color: white;} 
+   h3{text-align: center;color: blue;}
+p {text-align: center;color: blue;}
+h2 {text-align: center;color: blue;} 
 form{text-align: center;color: white;}
+label{text-align: center;color: blue;}
+
 .btn{
 
   background-color: white; 
@@ -27,14 +29,14 @@ form{text-align: center;color: white;}
 
   </style>
 </head>
-  <body style="background-color:black">
+  <body style="background-color:white">
      <table width="100%">
 
         <tr style="background-color:darkblue;width:300%px;height:250">
             <td align="center" style="color:black;"><b>
                     <div class="container">
             <div class="jumbotron">
-                <p style="color:white;"><font size="300"><h1>Black-Jack</h1></font><br><br></p>
+                <p><font size="300"><h1>Black-Jack</h1></font><br><br></p>
                 <center> <a href="/"><button class= "btn">Home</button></a></center>
             </div>
              </b></td>
@@ -44,37 +46,35 @@ form{text-align: center;color: white;}
         </table>
 
   
-      <h3><font size="8">Welcome to BlackJack! Get as close to 21 as you can without going over!<br>
+      <h3><font size="6">Welcome to BlackJack! Get as close to 21 as you can without going over!<br>
     Dealer hits until She/He reaches 17. Aces count as 1 or 11. Face cards count as 10.</font></h3>
-    <br><br>
-    <form class="form-signin" action="/" method="post" style="color: white;size: 50px;">
+    
+    <form class="form-signin" action="/" method="post">
      
       <label for="uname" class="sr-only"><font size="5">How many chips would you like to bet?</font> </label>
-      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus>
+      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus style="size:30px; height:35px">
       <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
       <br>
+      <br>
+      <h2><font size="5">Status of Game</font></h2><br>
+      <h3><font size="4">Dealer's Hand:</font></h3><br>
+
+      .............................<br>
+
+      <h3><font size="4">Player's Hand:</font></h3><br>
+      .............................<br>
       <br><br>
-      <h3><font size="5">Status of Game</font></h3><br>
-      <p1><font size="5">Dealer's Hand:</font></p1><br>
-
-      .............................<br>
-
-      <p1><font size="5">Player's Hand:</font></p1><br>
-      .............................<br>
-      <br><br><br>
 
        <label for="uname" class="sr-only"><font size="5">Would you like to Hit or Stand? Enter 'h' or 's'
        </font> 
        </label>
-      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus>
+      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus style="size:30px; height:35px">
     <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
   </div>
 </div>
 <br>
 <br>
-<br>
-<br><br>
-<h1>RESULT</h1>
+<h1 style="color: blue;">RESULT</h1>
 </body>
 </html>

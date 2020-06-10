@@ -7,9 +7,10 @@
   <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 	<style>
    h1 {text-align: center;color: white;}
-p {text-align: center;color: white;}
-h2 {text-align: center;color: white;} 
+p {text-align: center;color: blue;}
+h2 {text-align: center;color: blue;} 
 form{text-align: center;color: white;}
+label{text-align: center;color: blue;}
 .btn{
 
   background-color: white; 
@@ -17,6 +18,7 @@ form{text-align: center;color: white;}
   
   border-radius: 8px;
   font-size: 30px;
+
 }
 
 
@@ -27,14 +29,14 @@ form{text-align: center;color: white;}
 
   </style>
 </head>
-	<body style="background-color:black">
+	<body style="background-color:white">
      <table width="100%">
 
         <tr style="background-color:darkblue;width:300%px;height:250">
             <td align="center" style="color:black;"><b>
                     <div class="container">
             <div class="jumbotron">
-                <p style="color:white;"><font size="120">Stone Paper Sicssor<font></font><br><br></p>
+                <h1><font size="120">Stone Paper Sicssor<br><br></font></h1>
                   <center> <a href="/"><button class= "btn">Home</button></a></center>
               
             </div>
@@ -45,19 +47,23 @@ form{text-align: center;color: white;}
         </table>
     
         
-	<font size="20"><h1><font style="color: blue;">Enter Your choice</font></h1>
+	<h2>Enter Your choice</h2>
+<div class="container">
+  <div class="center">
 
-		<form class="form-signin" action="/spsp" method="post" style="color: white;size: 50px;">
+    <form class="form-signin" action="/spsp" method="post" style="color: white;size: 50px;">
      
-      <label for="uname" class="sr-only">1:Stone 2:paper 3:sicssor</label>
-      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus>
-     
-      
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-      
-    </form>
-  </font>
+      <label for="uname" class="sr-only"><font size="6">1:Stone 2:paper 3:sicssor</font></label>
+      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus style="size: 30px; height:35px;">
     
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+
+  
+    </form>
+
+
+
+
       {% if o !="Wrong Choice" and o!="" %}
      <h2><font size="30" style="color:blue;">Result</font></h2>
       <p><font size="20">Computer's Choice : {{user}}</font></p>

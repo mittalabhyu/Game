@@ -8,10 +8,20 @@
 
   <style>
    h1 {text-align: center;color: white;}
-p {text-align: center;color: white;}
-h2 {text-align: center;color: white;} 
+p {text-align: center;color: blue;}
+h2 {text-align: center;color: blue;} 
 form{text-align: center;color: white;}
+label{text-align: center;color: blue;}
 
+.vert {
+  border: 4px solid black;
+}
+.verthori {
+  border: 4px solid black;
+}
+.hori {
+  border: 4px solid black;
+}
 
 .btn{
 
@@ -29,15 +39,16 @@ form{text-align: center;color: white;}
 }
   </style>
 </head>
-  <body style="background-color:black">
+  <body style="background-color:white;">
      <table width="100%">
 
         <tr style="background-color:darkblue;width:300%px;height:250">
-            <td align="center" style="color:black;"><b>
+            <td align="center"><b>
                     <div class="container">
             <div class="jumbotron">
-                <p style="color:white;"><font size="120"><font><h1>Tic Tac Toe</h1></font></p>
-                <p style="color:white;font-size: 20px">Player 1 is X <br>Player 2 is O<br>Player 1 has first turn.</p>
+             <h1> <font size="120">Tic Tak Toe</font></h1>
+               <p style="color:white;font-size: 30px">{{res}}<br>{{res1}}<br>{{res2}}</p>
+                <p style="color:white;font-size: 30px">{{g}}</p>
                 <center> <a href="/"><button class= "btn">Home</button></a></center>
             </div>
              </b></td>
@@ -47,20 +58,22 @@ form{text-align: center;color: white;}
         
         </table>
 <table>
+
+
   <tr>
-    <td><p>1</p></td>
-    <td class="vert"><p>2</p></td>
-    <td><p>3</p></td>
+    <td><p>{{l[1]}}</p></td>
+    <td class="vert"><p>{{l[2]}}</p></td>
+    <td><p>{{l[3]}}</p></td>
   </tr>
   <tr>
-    <td class="hori"><p>4</p></td>
-    <td class="vert hori"><p>5</p></td>
-    <td class="hori"><p>6</p></td>
+    <td class="hori"><p>{{l[4]}}</p></td>
+    <td class="verthori"><p>{{l[5]}}</p></td>
+    <td class="hori"><p>{{l[6]}}</p></td>
   </tr>
   <tr>
-    <td><p>7</p></td>
-    <td class="vert"><p>8</p></td>
-    <td><p>9</p></td>
+    <td><p>{{l[7]}}</p></td>
+    <td class="vert"><p>{{l[8]}}</p></td>
+    <td><p>{{l[9]}}</p></td>
   </tr>
 </table>
 <div class="container">
@@ -68,8 +81,8 @@ form{text-align: center;color: white;}
 
     <form class="form-signin" action="/ttp" method="post" style="color: white;size: 50px;">
      
-      <label for="uname" class="sr-only"> Enter position to place your symbol(1-9).</label>
-      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus>
+      <label for="uname" class="sr-only"> <font size="6">Enter position to place your symbol(1-9).</font></label>
+      <input type="text" id="uname" name="uname" class="form-control" placeholder={{m}} required autofocus style="size: 30px;height: 35px;">
      
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
@@ -81,27 +94,7 @@ form{text-align: center;color: white;}
  
   </div>
 </div>
-<br>
-<br>
-<br>
-<br><br>
 
-
-
- <!--ye tum sahi krlo game me kya enter krna hai samajh nhi aa rha h mujhe ki har baar index submit krna h ya kuch or -->
-    
-      {% if o !="Wrong Choice" and o!="" %}
-     <h2><font size="30" style="color:blue;">Result</font></h2>
-      <p><font size="20">Computer's Choice : {{user}}</font></p>
-      <p><font size="20">User's Choice : {{o}}</font></p>
-      <p><font size="20"> {{res}}</font></p>
-        
-    {% endif %}
-    {% if o =="Wrong Choice" and o!="" %}
-      <h2><font size="20">Wrong Choice</font></h2>
-      
-        
-    {% endif %}
     
     
     
