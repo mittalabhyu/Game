@@ -9,11 +9,24 @@ from flask import Flask, render_template, request,session,redirect
 import random
 
 l=["0","1","2","3","4","5","6","7","8","9"]
+three=[]
 turn=1
 res="Player 1 is X"
 res1="Player 2 is O"
 res2="Player 1 has first turn."
 g=""
+ss=""
+s1,s2=0,0
+kk,jj=1,1
+one=[]
+chip,bet=100,0
+rb=""
+suits = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
+ranks = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
+values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,'Nine':9, 'Ten':10, 'Jack':10, 'Queen':10, 'King':10, 'Ace':11}
+deck=[]
+
+
 app = Flask(__name__)
 
 
@@ -25,6 +38,8 @@ def home():
     global g
     global res1
     global res2
+    global chip,bet
+    chip,bet=100,0
     res="Player 1 is X"
     res1="Player 2 is O"
     res2="Player 1 has first turn."
@@ -139,8 +154,106 @@ def play2():
         else:
             r="Computer Win!! Better luck next time"
     return render_template('sps.html',user=l[m],o=s,res=r)
+
 @app.route("/bjp",methods=['GET','POST'])
 def play3():
-    return render_template('black.html')
+    global chip,bet,one,three
+    global ss,s1,s2,kk,jj
+    global rb
+    s1,s2,bet,ppp=0,0,0,0
+    for i in ranks:
+        for j in suits:
+            deck.append(i+" of "+j)
+    random.shuffle(deck)
+    ss,rb,ph="","","Choice"
+    s1,s2=0,0
+    one=""
+    two=""
+    jj,kk=1,1
+    three=[]
+    one=[]
+    if request.method=='POST':
+        n=int(request.form.get('uname'))
+        if n>chip:
+            ss="Enter Valid number"
+            return render_template('black.html',ss=ss,chip=chip)
+        else:
+            bet=n
+            
+            one.append(deck.pop())
+            ll=list(one[0].split(" "))
+            s1+=values[ll[0]]
+            one.append(deck.pop())
+            ll=list(one[1].split(" "))
+            s1+=values[ll[0]]
+            three.append(deck.pop())
+            ll=list(three[0].split(" "))
+            s2+=values[ll[0]]
+            three.append(deck.pop())
+            ll=list(three[1].split(" "))
+            s2+=values[ll[0]]
+            
+            kk=len(one)
+            jj=len(three)
+            return render_template('bp.html',ph=ph,rb=rb,one=one,two="<hidden>",three=three,j=jj,k=kk,s1=s1,s2=s2)
+    return render_template('black.html',chip=chip,ss=ss)
+@app.route("/bp",methods=['GET','POST'])
+def play4():
+    global chip,bet,one,two,three
+    global ss,rb,s1,s2,kk,jj
+    ph="Choice"
+    n=""
+
+    if rb=="":
+        if request.method=='POST':
+            n=request.form.get('uname')
+            if n=="s" or n=="S":
+                while s1 < 17:
+                    pp=deck.pop()
+                    one.append(pp)
+                    ll=list(pp.split(" "))
+                    if ll[0]=="Ace":
+                        if s1+values[ll[0]]>21:
+                            s1+=1
+                    else:
+                        
+                        s1+=values[ll[0]]
+                    
+                
+                    kk=len(one)
+            elif n=="h" or n=="H":
+               
+                ppp=deck.pop()
+                three.append(ppp)
+                ll=list(ppp.split(" "))
+                if ll[0]=="Ace":
+                    if s2+values[ll[0]]>21:
+                        s2+=1
+                else:
+                    
+                    s2+=values[ll[0]]
+                
+                jj=len(three)
+                if s2 > 21:
+                     rb="Player Busts..Dealer Wins!"
+                     chip=chip-bet
+            else:
+                ph="Wrong_Choice"
+                return render_template('bp.html',ph=ph,rb=rb,one=one,two="<hidden>",three=three,j=jj,k=kk,s1=s1,s2=s2)
+    if s2<=21 and n!="h":
+        if s1>21:
+            chip=chip+bet
+            rb="Dealer Busts.. Player Wins!"
+        elif s1>s2:
+            chip=chip-bet
+            rb="Dealer Win!"
+        elif s2>s1:
+            rb="Player Win!"
+            chip=chip+bet
+        else:
+            rb="Draw"
+       
+    
+    return render_template('bp.html',ph=ph,rb=rb,one=one,two="<hidden>",three=three,j=jj,k=kk,s1=s1,s2=s2)
 app.run(debug="True")
 
