@@ -7,10 +7,10 @@
   <link href="{{ url_for('static', filename='img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 	<style>
    h1 {text-align: center;color: white;}
-p {text-align: center;color: blue;}
-h2 {text-align: center;color: blue;} 
+p {text-align: center;color: darkblue; }
+h2 {text-align: center;color: darkblue;} 
 form{text-align: center;color: white;}
-label{text-align: center;color: blue;}
+label{text-align: center;color: darkblue;}
 .btn{
 
   background-color: white; 
@@ -25,7 +25,50 @@ label{text-align: center;color: blue;}
 .btn:hover {
   background-color: dodgerblue;
   color: white;
+
 }
+#p1{
+background-color: pink;
+
+width: 250px;
+height: 40px;
+margin-left: 650px;
+padding-top: 10px;
+
+}
+
+#p2{
+background-color: yellow;
+width: 250px;
+
+height: 40px;
+margin-left: 650px;
+padding-top: 10px;
+}
+#p3{
+  background-color: #00FFFF;
+  width:250px;
+height: 40px;
+margin-left: 650px;
+padding-top: 10px;
+ }
+
+@media (max-width: 992px) {
+  #p1{
+    font-size: 36px;
+    align-items: center;
+    margin-left: 350px;
+  }
+  #p2{ font-size: 36px;
+    align-items: center;
+    margin-left: 350px;
+  }
+  #p3{
+    font-size: 36px;
+    align-items: center;
+    margin-left: 350px;
+  }
+  }
 
   </style>
 </head>
@@ -47,13 +90,15 @@ label{text-align: center;color: blue;}
         </table>
     
         
-	<h2>Enter Your choice</h2>
+	<h2><font size="10">Enter Your choice</font></h2>
 <div class="container">
   <div class="center">
 
     <form class="form-signin" action="/spsp" method="post" style="color: white;size: 50px;">
      
-      <label for="uname" class="sr-only"><font size="6">1:Stone 2:paper 3:sicssor</font></label>
+      <label for="uname" class="sr-only"><font size="6"><p id="p1">1:Stone</p>
+  <p id="p2">2:Paper</p>
+  <p id="p3">3:Scissor</p></font></label>
       <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus style="size: 30px; height:35px;">
     
       <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>

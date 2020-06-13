@@ -80,7 +80,7 @@ padding-top: 10px;
                     <div class="container">
             <div class="jumbotron">
                 <p><font size="300"><h1>Black-Jack</h1></font><br><br></p>
-                <center> <a href="/"><button class= "btn">Home</button></a></center>
+                <center> <a href="/bjp"><button class= "btn">Replay</button></a></center>
             </div>
              </b></td>
         </tr>
@@ -89,15 +89,39 @@ padding-top: 10px;
         </table>
 
   
-      <h3 id="h3"><font size="6">Welcome to BlackJack! Get as close to 21 as you can without going over!<br>
-    Dealer hits until She/He reaches 17. Aces count as 1 or 11. Face cards count as 10.<br>You have {{chip}} chips to Bet.<br>{{ss}}</font></h3>
-    
-    <form class="form-signin" action="/bjp" method="post">
-     
-      <label for="uname" class="sr-only"><font size="5">How many chips would you like to bet?</font> </label>
-      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus style="size:30px; height:35px">
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      <h2><font size="5">Status of Game<br>{{rb}}</font></h2>
+      <h3><font size="4">Dealer's Hand:</font></h3>
+    {% if rb=="" %}
+      <p style="color: red;">{{two}}<br>{{one[1]}}</p>
       
+        
+    {% endif %}
+    {% if rb!="" %}
+      
+      {% for i in range(k) %}
+      <p style="color: red;">{{one[i] }}</p>
+      {% endfor %}
+      <p style="color: blue;">dealers total: {{s1}}<br>players total: {{s2}}</p>
+        
+    {% endif %}
+      
+      
+    
+
+
+      <h3><font size="4">Player's Hand:</font></h3>
+      {% for i in range(j) %}
+      <p style="color: red;">{{three[i] }}</p>
+      {% endfor %}
+    
+    <form class="form-signin" action="/bp" method="post">
+      
+
+       <label for="uname" class="sr-only"><font size="5">Would you like to Hit or Stand? Enter 'h' or 's'
+       </font> 
+       </label>
+      <input type="text" id="uname" name="uname" class="form-control" placeholder="Choice" required autofocus style="size:30px; height:35px">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
     </form>
   </div>
 </div>
