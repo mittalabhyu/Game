@@ -1,11 +1,5 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jun  7 22:04:55 2020
 
-@author: HP
-"""
-
-from flask import Flask, render_template, request,session,redirect
+from flask import Flask, render_template, request
 import random
 
 l=["0","1","2","3","4","5","6","7","8","9"]
@@ -255,5 +249,5 @@ def play4():
        
     
     return render_template('bp.html',ph=ph,rb=rb,one=one,two="<hidden>",three=three,j=jj,k=kk,s1=s1,s2=s2)
-app.run(debug="True")
+
 
