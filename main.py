@@ -249,6 +249,6 @@ def play4():
        
     
     return render_template('bp.html',ph=ph,rb=rb,one=one,two="<hidden>",three=three,j=jj,k=kk,s1=s1,s2=s2)
-app.run(debug="True")
+app.run()
 
 
