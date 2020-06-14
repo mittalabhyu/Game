@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request
 import random
 
@@ -21,8 +20,8 @@ values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,
 deck=[]
 
 
-app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app =Flask(__name__)
+
 
 
 @app.route("/",methods=['GET','POST'])
