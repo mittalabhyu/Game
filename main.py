@@ -24,7 +24,7 @@ deck=[]
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/",methods=['GET','POST'])
 def home():
     global l
     global turn
@@ -44,17 +44,17 @@ def home():
    
    
     return render_template('index.html')
-@app.route("/tictak")
+@app.route("/tictak",methods=['GET','POST'])
 def game1():
    
    
     return render_template('ticabout.html')
-@app.route("/sps")
+@app.route("/sps",methods=['GET','POST'])
 def game2():
    
    
     return render_template('stoneabout.html')
-@app.route("/blackjack")
+@app.route("/blackjack",methods=['GET','POST'])
 def game3():
    
    
