@@ -21,7 +21,8 @@ values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,
 deck=[]
 
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
 
 
 @app.route("/",methods=['GET','POST'])
@@ -249,5 +250,6 @@ def play4():
        
     
     return render_template('bp.html',ph=ph,rb=rb,one=one,two="<hidden>",three=three,j=jj,k=kk,s1=s1,s2=s2)
+app.run()
 
 
