@@ -1,12 +1,17 @@
-from flask import Flask, render_template, request
-import random
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jun  7 22:04:55 2020
 
-l=["0","1","2","3","4","5","6","7","8","9"]
+@author: HP
+"""
+
+from flask import Flask, render_template, request,session,redirect
+import random
+from flask_pymongo import PyMongo
+from pymongo import MongoClient
+
+app = Flask(__name__)
 three=[]
-turn=1
-res="Player 1 is X"
-res1="Player 2 is O"
-res2="Player 1 has first turn."
 g=""
 ss=""
 s1,s2=0,0
@@ -20,54 +25,67 @@ values = {'Two':2, 'Three':3, 'Four':4, 'Five':5, 'Six':6, 'Seven':7, 'Eight':8,
 deck=[]
 
 
-app =Flask(__name__)
-
-
-
-@app.route("/",methods=['GET','POST'])
+@app.route("/")
 def home():
-    global l
-    global turn
-    global res
-    global g
-    global res1
-    global res2
+    
     global chip,bet
     chip,bet=100,0
-    res="Player 1 is X"
-    res1="Player 2 is O"
-    res2="Player 1 has first turn."
-    g=""
-    l=["0","1","2","3","4","5","6","7","8","9"]
-    turn=1
-
+    client=MongoClient("mongodb+srv://mittalabhyu:Abhyudaya@cluster0-fckkh.mongodb.net/tictak?retryWrites=true&w=majority")
+    db=client.get_database('tictak')
+    rec=db.play
+    rec1=db.result
+    k1=list(rec1.find())
+    new1={'0':'Player 1 is X'}
+    rec1.update_one({'0':'DRAW!!!'},{'$set':new1})
+    rec1.update_one({'0':'Player 2 is Winner!!!'},{'$set':new1})
+    rec1.update_one({'0':'Player 1 is Winner!!!'},{'$set':new1})
+    k=list(rec.find())
+    for i in range(10):
+        j=str(i)
+        new={j:j}
+        rec.update_one({j:'X'},{'$set':new})
+        rec.update_one({j:'O'},{'$set':new})
+        rec.update_one({'0':'1'},{'$set':new})
+    
    
    
     return render_template('index.html')
-@app.route("/tictak",methods=['GET','POST'])
+@app.route("/tictak")
 def game1():
    
    
     return render_template('ticabout.html')
-@app.route("/sps",methods=['GET','POST'])
+@app.route("/sps")
 def game2():
    
    
     return render_template('stoneabout.html')
-@app.route("/blackjack",methods=['GET','POST'])
+@app.route("/blackjack")
 def game3():
    
    
     return render_template('blackabout.html')
 @app.route("/ttp",methods=['GET','POST'])
 def play1():
+    l=["0","1","2","3","4","5","6","7","8","9"]
+    res="Player 1 is X"
+    res1="Player 2 is O"
+    res2="Player 1 has first turn."
+    client=MongoClient("mongodb+srv://mittalabhyu:Abhyudaya@cluster0-fckkh.mongodb.net/tictak?retryWrites=true&w=majority")
+    db=client.get_database('tictak')
+    rec=db.play
+    rec1=db.result
+    k1=list(rec1.find())
+    k=list(rec.find())
+    res=k1[0]['0']
+    if res!="Player 1 is X":
+        res1=""
+        res2=""
+    for i in range(10):
+        j=str(i)
+        l[i]=k[i][j]
     
-    global turn
-    global l
-    global res
-    global g
-    global res1
-    global res2
+    g=""
     m="Choice"
     c=0
    
@@ -75,12 +93,22 @@ def play1():
         if request.method=='POST':
             n=int(request.form.get('uname'))
             if n>0 and n<10:
-                if turn==1 and l[n]!="O":
+                if l[0]=="0" and l[n]!="O" and l[n]!="X":
                     l[n]="X"
-                    turn=2
-                elif turn==2 and l[n]!="X":
+                    qq=str(n)
+                    new={qq:'X'}
+                    new1={'0':'1'}
+                    rec.update_one({qq:qq},{'$set':new})
+                    rec.update_one({'0':'0'},{'$set':new1})
+                elif l[0]=="1" and l[n]!="X" and l[n]!="O":
                     l[n]="O"
-                    turn=1
+                    qq=str(n)
+                    new={qq:'O'}
+                    new1={'0':'0'}
+                    rec.update_one({qq:qq},{'$set':new})
+                    rec.update_one({'0':'1'},{'$set':new1})
+                else:
+                    m="Already_Filled"
             else:
                 m="Wrong_Choice"
     else:
@@ -90,32 +118,46 @@ def play1():
             c+=1
     if c>=9:
         res="DRAW!!!"
+        new1={'0':'DRAW!!!'}
         res1=""
         res2=""
+        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
     elif (l[1]=="X" and l[2]=="X" and l[3]=="X") or (l[4]=="X" and l[5]=="X" and l[6]=="X")or(l[7]=="X" and l[8]=="X" and l[9]=="X"):
         res="Player 1 is Winner!!!"
+        new1={'0':'Player 1 is Winner!!!'}
         res1=""
         res2=""
+        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
     elif (l[1]=="O" and l[2]=="O" and l[3]=="O") or (l[4]=="O" and l[5]=="O" and l[6]=="O")or(l[7]=="O" and l[8]=="O" and l[9]=="O"):
         res="Player 2 is Winner!!!"
+        new1={'0':'Player 2 is Winner!!!'}
         res1=""
         res2=""
+        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
     elif (l[1]=="X" and l[4]=="X" and l[7]=="X") or (l[2]=="X" and l[5]=="X" and l[8]=="X")or(l[3]=="X" and l[6]=="X" and l[9]=="X"):
         res="Player 1 is Winner!!!"
+        new1={'0':'Player 1 is Winner!!!'}
         res1=""
         res2=""
+        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
     elif (l[1]=="O" and l[4]=="O" and l[7]=="O") or (l[2]=="O" and l[5]=="O" and l[8]=="O")or(l[3]=="O" and l[6]=="O" and l[9]=="O"):
         res="Player 2 is Winner!!!"
+        new1={'0':'Player 2 is Winner!!!'}
         res1=""
         res2=""
+        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
     elif (l[1]=="O" and l[5]=="O" and l[9]=="O") or (l[3]=="O" and l[5]=="O" and l[7]=="O"):
         res="Player 2 is Winner!!!"
+        new1={'0':'Player 2 is Winner!!!'}
         res1=""
         res2=""
+        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
     elif (l[1]=="X" and l[5]=="X" and l[9]=="X") or (l[3]=="X" and l[5]=="X" and l[7]=="X"):
         res="Player 1 is Winner!!!"
+        new1={'0':'Player 1 is Winner!!!'}
         res1=""
         res2=""
+        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
     
         
     return render_template('tictak.html',l=l,m=m,res=res,g=g,res1=res1,res2=res2)
@@ -249,6 +291,5 @@ def play4():
        
     
     return render_template('bp.html',ph=ph,rb=rb,one=one,two="<hidden>",three=three,j=jj,k=kk,s1=s1,s2=s2)
-
 
 
