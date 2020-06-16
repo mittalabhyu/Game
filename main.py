@@ -116,13 +116,8 @@ def play1():
     for i in l:
         if i=="X" or i=="O":
             c+=1
-    if c>=9:
-        res="DRAW!!!"
-        new1={'0':'DRAW!!!'}
-        res1=""
-        res2=""
-        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
-    elif (l[1]=="X" and l[2]=="X" and l[3]=="X") or (l[4]=="X" and l[5]=="X" and l[6]=="X")or(l[7]=="X" and l[8]=="X" and l[9]=="X"):
+    
+    if (l[1]=="X" and l[2]=="X" and l[3]=="X") or (l[4]=="X" and l[5]=="X" and l[6]=="X")or(l[7]=="X" and l[8]=="X" and l[9]=="X"):
         res="Player 1 is Winner!!!"
         new1={'0':'Player 1 is Winner!!!'}
         res1=""
@@ -155,6 +150,12 @@ def play1():
     elif (l[1]=="X" and l[5]=="X" and l[9]=="X") or (l[3]=="X" and l[5]=="X" and l[7]=="X"):
         res="Player 1 is Winner!!!"
         new1={'0':'Player 1 is Winner!!!'}
+        res1=""
+        res2=""
+        rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
+    elif c>=9:
+        res="DRAW!!!"
+        new1={'0':'DRAW!!!'}
         res1=""
         res2=""
         rec1.update_one({'0':'Player 1 is X'},{'$set':new1})
